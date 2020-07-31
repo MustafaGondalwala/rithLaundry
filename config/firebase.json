@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "rithlaundry-dc066",
+  "private_key_id": "c2ac15c990481fec66c13e07d91a8bf662a977c5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC3I4leW33ppEhK\nbOlrLpCyIb88MSjaa6DrJ+j18nwjg/djvvXVf1mVNRciasLt3iN13kaOqNnrUjwd\neYkGqEnrGNftyGztbc1haN/dgtIX6I47szZwuG5UdN2ncwdCSfYQf7LCQXPqfFwb\ng77eblkL9RoDN+/eX5rct8k0a9vqiG+dLQ2UFUHuwq3ApasDZBi0Vp4oexWp1sE7\n1cL/w70HLCowHctPulHg+dcb7eR01bVhtBd3kBWSvaHwzcD58DfmPzfoj1161EIE\n+/sGl9LQ4k2Lan4CPxsmUXODw8152QhLk74kAbFoc6R1Dlf1lgKwnHnDbLKMFt/r\nRFsPNPunAgMBAAECggEABFrK9xG+h7depK5m9SPRUFBZx2j1K2Rob3mud2gBqFKI\np7gwXkLonWdQGoMRXtiWXUTLcV71zOZSrvIR3l+oCk1il7EureKbge0deEXruvfO\nUgBr6KLqCgYRXdxFWD/WowPLpgTVExv2kLeW6pu9xaQEBKmS1uXNEox9iJ/mmx1Y\nVfn2zWZ9XyF4sLruz3D4Que4MymXib3HHZl55aDNU2OeOwCTp6FyiwCBjjfWN0vM\n3CIVYWs/n4B2OpYB932rRpSabZd8Ow0+tNJAooqr3Q/msW6nitsEkaeDZA5ZEWv3\n7KQ1Ci8YH5PIzypeSgjAIfC93YnjexC5Pul7n2GJUQKBgQD5mP65oWzJ/4W5lTtE\nje2b+feMvmm/TmYwrpcvnq14kxJZsE4TluG6yImm7hBIJIVEzMM9L5FvhoydYtVP\nOTHexPtGHLMI4R5ZG0ivKRdeDZFzO4wAr1byPHDfrCvOw0oZdusl/F5KTWjEDgXD\nc5zDmGNQ+3LCsWfLl7o2wTCo/wKBgQC71iJDL7i2+FqbpTUj3WCh4BqL/DMsTVCN\nznmiXb3Iqnxxm+E+Az9KTcQK7u/+QaLTtQoDKJ+wYiZURr6VGa2FR53pqPA8vySC\nOmwkzQYOoDLwi1XefiEmOr5KbQUqLNUh4DDxWSxqOeMcz24xi9LjNFXilp+wuWlR\n04CGnsLFWQKBgQCqmguJ4C9WxmOl3L289vGxCiNNPR1UmIa6wasu7luNraD+Usab\nFydFHysPQWs5lFTPGNJeMPRMcYANV2+LjgFrTeKeIqGw8QZoS4Db0M9bBxUi2VGx\naieYvP09tRXgZpVwYFsMBLqCOPTiBN+ln5FIFBHWWXgwYUgb3aJ3KIdVCwKBgQCF\ninKnc4kORDkeyPCjw+LMkygsd6vmBj2L48xkG+Mug86fcqRLU0Gu0OTcpQzopb9e\nZiptHneRjeYUKouaMzxDMixZj6rkdTw+fcyeyUhSI6CzlUwCN4fXxxG8lg+C8YbB\nY8NIAw7poqgNtodwIClZML8SreVwXhE7hHOuwbZVWQKBgDcMq/o1xgroRk9vDcCN\nM2o7LIrpUzV0Kn+tuDmZEvBh0n5B5jBaewRYK2fNrDBdE30nxS0FDdwRAhnC9PrD\nlv2z8aTRe6Qlt8AqbsrOv9Tky5Eh8TJ9KX6XNWrHxPqNOUCX4lG2KKnzGV/tWOez\nNvQKwdmW5ilxU/4whriwQI8/\n-----END PRIVATE KEY-----\n",
+  "client_email": "rithlaundry-dc066@appspot.gserviceaccount.com",
+  "client_id": "113201883959760450297",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rithlaundry-dc066%40appspot.gserviceaccount.com"
+}
