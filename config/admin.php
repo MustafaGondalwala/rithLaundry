@@ -11,7 +11,7 @@ return [
     | login page.
     |
     */
-    'name' => 'Rith Laundary',
+    'name' => 'MRD Laundary',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ return [
     | `img` tag, eg '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo' => '<b>Rith</b> Laundary',
+    'logo' => '<b>MRD</b> Laundary',
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return [
     | '<img src="http://logo-url" alt="Admin logo">'.
     |
     */
-    'logo-mini' => '<b>RL</b>',
+    'logo-mini' => '<b>MRD</b>',
 
     /*
     |--------------------------------------------------------------------------

@@ -68,13 +68,14 @@ class DeliveryBoyController extends AdminController
     protected function detail($id)
     {
         $show = new Show(DeliveryBoy::findOrFail($id));
-
+// dd($show);
         $show->field('id', __('Id'));
         $show->field('delivery_boy_name', __('Delivery boy name'));
         $show->field('phone_number', __('Phone number'));
         $show->field('email', __('Email'));
         $show->field('password', __('Password'));
         $show->field('profile_picture', __('Profile picture'));
+
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));

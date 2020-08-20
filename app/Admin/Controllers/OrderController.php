@@ -251,9 +251,7 @@ class OrderController extends AdminController
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
-        
         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
-        
         return $downstreamResponse->numberSuccess();
     }
 } 
