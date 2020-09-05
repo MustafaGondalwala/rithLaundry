@@ -30,8 +30,7 @@ class PaymentMethodController extends Controller
     public function stripe_payment(Request $request){
         $input = $request->all();
         $stripe = new Stripe();
-        $currency_code = AppSetting::value('currency_short_code');
-        
+        $currency_code = 'INR';
         try {
             $charge = $stripe->charges()->create([
                 'source' => $input['token'],
@@ -44,7 +43,7 @@ class PaymentMethodController extends Controller
             $data['customer_id'] = $input['customer_id'];
             $data['payment_mode'] = 2;
             $data['payment_response'] = $charge['id'];
-            
+            dd($data);
             if(PaymentResponse::create($data)){
                 return response()->json([
                     "result" => $charge['id'],

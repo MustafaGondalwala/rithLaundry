@@ -48,7 +48,10 @@ class OrderController extends Controller
         $validator = Validator::make($input, [
             'customer_id' => 'required',
             'address_id' => 'required',
-            'expected_delivery_date' => 'required',
+            'delivery_date' => 'required',
+            'delivery_time' => 'required',
+            'pickup_date' => 'required',
+            'pickup_date' => 'required',
             'total' => 'required',
             'discount' => 'required',
             'sub_total' => 'required',
@@ -65,9 +68,14 @@ class OrderController extends Controller
         $payment_response = $input['payment_response'];
         unset($input['payment_response']);
         $items = json_decode($input['items'], true);
-        $date = explode('/',$input['expected_delivery_date']);
-        $input['expected_delivery_date'] = $date[2].'-'.$date[1].'-'.$date[0];
-        $input['expected_delivery_date'] = date('Y-m-d', strtotime($input['expected_delivery_date']));
+        
+        $date = explode('/',$input['delivery_date']);
+        $input['delivery_date'] = $date[2].'-'.$date[1].'-'.$date[0];
+        $input['delivery_date'] = date('Y-m-d', strtotime($input['delivery_date']));
+        
+        $date = explode('/',$input['pickup_date']);
+        $input['pickup_date'] = $date[2].'-'.$date[1].'-'.$date[0];
+        $input['pickup_date'] = date('Y-m-d', strtotime($input['pickup_date']));
         $order = Order::create($input);
         $order_id = str_pad($order->id, 5, "0", STR_PAD_LEFT);
         Order::where('id',$order->id)->update([ 'order_id'=>$order_id]);
