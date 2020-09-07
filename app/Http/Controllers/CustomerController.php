@@ -41,21 +41,15 @@ class CustomerController extends Controller
             'customer_name' => 'required',
             'phone_number' => 'required|numeric|digits_between:9,20|unique:customers,phone_number',
             'email' => 'required|email|regex:/^[a-zA-Z]{1}/|unique:customers,email',
-            'password' => 'required'
         ]);
-
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
-
         $options = [
             'cost' => 12,
         ];
-        $input['password'] = password_hash($input["password"], PASSWORD_DEFAULT, $options);
         $input['status'] = 1;
-
         $customer = Customer::create($input);
-
         if (is_object($customer)) {
             return response()->json([
                 "result" => $customer,
@@ -175,6 +169,12 @@ class CustomerController extends Controller
     }
     public function sendOtp(Request $request){
         $customer_exist = Customer::where(["phone_number"=>$request->phone_number])->count();
+        if($customer_exist == 0){
+            return response()->json([
+                "message" => 'Cannot Found Phone Number',
+                "status" => 0
+            ]);
+        }
         $random_number = $this->otp($request->phone_number);
         Customer::where(["phone_number"=>$request->phone_number])->update(["otp"=>$random_number]);
         return response()->json([
