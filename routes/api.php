@@ -32,6 +32,8 @@ Route::get('app_setting', 'AppSettingController@index');
 Route::post('privacy_policy', 'PrivacyPolicyController@index');
 Route::post('order', 'OrderController@store');
 Route::post('get_orders', 'OrderController@getOrders');
+Route::post('feedback',"OrderController@updateFeeback");
+
 Route::resource('delivery_partner', 'DeliveryBoyController');
 Route::post('delivery_partner/profile_picture', 'DeliveryBoyController@profile_picture');
 Route::post('delivery_partner/login', 'DeliveryBoyController@login');

@@ -35,7 +35,21 @@ class OrderController extends Controller
     {
         //
     }
+    public function updateFeeback(Request $request){
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'order_id' => 'required',
+        ]);
 
+        if($validator->fails()) {
+            return $this->sendError($validator->errors());
+        }
+        Order::where('id',$input['order_id'])->update([ 'feedback'=>$input['feedback'],"feedback_input"=>$input['feedback_input']]);
+        return response()->json([
+            "message" => 'Feedback Updated',
+            "status" => 1
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -78,6 +92,7 @@ class OrderController extends Controller
         $input['pickup_date'] = date('Y-m-d', strtotime($input['pickup_date']));
         $order = Order::create($input);
         $order_id = str_pad($order->id, 5, "0", STR_PAD_LEFT);
+        
         Order::where('id',$order->id)->update([ 'order_id'=>$order_id]);
         if (is_object($order)) {
             foreach ($items as $key => $value) {
@@ -160,7 +175,7 @@ class OrderController extends Controller
             ->join('addresses', 'addresses.id', '=', 'orders.address_id')
             ->join('labels', 'labels.id', '=', 'orders.status')
             ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
-            ->select('orders.id','orders.order_id','payment_methods.payment_mode','addresses.address','addresses.door_no','orders.expected_delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name','orders.created_at','orders.updated_at')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name','orders.created_at','orders.updated_at')
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
@@ -169,7 +184,7 @@ class OrderController extends Controller
             ->join('addresses', 'addresses.id', '=', 'orders.address_id')
             ->join('labels', 'labels.id', '=', 'orders.status')
             ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
-            ->select('orders.id','orders.order_id','payment_methods.payment_mode_ar as payment_mode','addresses.address','addresses.door_no','orders.expected_delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_ar as label_name','orders.created_at','orders.updated_at')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode_ar as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_ar as label_name','orders.created_at','orders.updated_at')
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
