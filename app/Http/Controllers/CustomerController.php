@@ -169,9 +169,20 @@ class CustomerController extends Controller
     {
         //
     }
-
+    public function otp($phone_number){
+        // return rand(1,9999);
+        return 1234;
+    }
+    public function sendOtp(Request $request){
+        $customer_exist = Customer::where(["phone_number"=>$request->phone_number])->count();
+        $random_number = $this->otp($request->phone_number);
+        Customer::where(["phone_number"=>$request->phone_number])->update(["otp"=>$random_number]);
+        return response()->json([
+            "message" => 'Otp Sended',
+            "status" => 1
+        ]);
+    }
     public function login(Request $request){
-
         $input = $request->all();
         $validator = Validator::make($input, [
             'email' => 'required',

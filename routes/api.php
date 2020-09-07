@@ -25,6 +25,8 @@ Route::resource('address', 'AddressController');
 Route::post('address/all', 'AddressController@all_addresses');
 Route::post('address/delete', 'AddressController@delete');
 Route::post('customer/login', 'CustomerController@login');
+Route::post('customer/otp', 'CustomerController@sendOtp');
+
 Route::post('customer/forgot_password', 'CustomerController@forgot_password');
 Route::post('customer/reset_password', 'CustomerController@reset_password');
 Route::post('promo', 'PromoCodeController@index');
