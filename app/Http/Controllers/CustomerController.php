@@ -185,17 +185,15 @@ class CustomerController extends Controller
     public function login(Request $request){
         $input = $request->all();
         $validator = Validator::make($input, [
-            'email' => 'required',
-            'password' => 'required'
+            'phone_number' => 'required',
+            'otp' => 'required'
         ]);
-
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
 
-        $credentials = request(['email', 'password']);
-        $customer = Customer::where('email',$credentials['email'])->first();
-
+        $credentials = request(['phone_number', 'otp']);
+        $customer = Customer::where(['phone_number'=>$credentials['phone_number'],"otp"=>$credentials['otp']])->first();
         if (!($customer)) {
             return response()->json([
                 "message" => 'Invalid email or password',
@@ -203,7 +201,6 @@ class CustomerController extends Controller
             ]);
         }
         
-        if (Hash::check($credentials['password'], $customer->password)) {
             if($customer->status == 1){
                 Customer::where('id',$customer->id)->update([ 'fcm_token' => $input['fcm_token']]);
                 return response()->json([
@@ -217,13 +214,6 @@ class CustomerController extends Controller
                     "status" => 0
                 ]);
             }
-        }else{
-            return response()->json([
-                "message" => 'Invalid email or password',
-                "status" => 0
-            ]);
-        }
-
     }
 
     public function profile_picture(Request $request){
