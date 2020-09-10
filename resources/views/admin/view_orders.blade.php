@@ -23,9 +23,23 @@
                 <td>{{$address}}</td>
               </tr>
               <tr>
-                <th>Expected Delivery Date</th>
-                <td>{{$expected_delivery_date}}</td>
+                <th> Delivery Date</th>
+                <td>{{$delivery_date}}</td>
               </tr>
+              
+              <tr>
+                <th> Delivery Date</th>
+                <td>{{$delivery_time}}</td>
+              </tr>
+              <tr>
+                <th> Pickup Date</th>
+                <td>{{$pickup_date}}</td>
+              </tr>
+              <tr>
+                <th> Pickup Time</th>
+                <td>{{$pickup_time}}</td>
+              </tr>
+             
             </tbody>
           </table>
         </div>

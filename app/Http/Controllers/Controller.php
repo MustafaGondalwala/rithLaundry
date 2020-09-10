@@ -41,7 +41,6 @@ class Controller extends BaseController
         $data = $dataBuilder->build();
         
         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
-        
         return $downstreamResponse->numberSuccess();
     }
 }

@@ -48,8 +48,20 @@ class OrderController extends AdminController
         $grid->column('customer_id', __('Customer id'))->display(function($customer_id){
             return Customer::where('id',$customer_id)->value('customer_name');
         });
-        $grid->column('expected_delivery_date', __('Expected delivery date'))->display(function($expected_delivery_date){
+        $grid->column('delivery_date', __('Delivery date'))->display(function($expected_delivery_date){
             return date('d M-Y',strtotime($expected_delivery_date));
+        });
+        
+        $grid->column('delivery_time', __('Delivery Time'))->display(function($expected_delivery_date){
+            return date('h:m',strtotime($expected_delivery_date));
+        });
+
+        $grid->column('pickup_date', __('Pickup date'))->display(function($expected_delivery_date){
+            return date('d M-Y',strtotime($expected_delivery_date));
+        });
+        
+        $grid->column('pickup_time', __('Pickup Time'))->display(function($expected_delivery_date){
+            return date('h:m',strtotime($expected_delivery_date));
         });
         $grid->column('delivered_by', __('Delivered by'))->display(function($delivered_by){
             if($delivered_by){

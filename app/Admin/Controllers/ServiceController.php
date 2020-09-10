@@ -29,9 +29,13 @@ class ServiceController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('service_name', __('Service Name'));
-        $grid->column('service_name_ar', __('Service Name Ar'));
+        $grid->column('service_name_gj', __('Service Name Gj'));
+        $grid->column('service_name_hi', __('Service Name Hi'));
+
         $grid->column('description', __('Description'));
-        $grid->column('description_ar', __('Description Ar'));
+        $grid->column('description_gj', __('Description Gj'));
+        $grid->column('description_hi', __('Description Hi'));
+
         $grid->column('status', __('Status'))->display(function($status){
             $status_name = Status::where('id',$status)->value('status_name');
             if ($status == 1) {
@@ -89,13 +93,20 @@ class ServiceController extends AdminController
         $form->text('service_name', __('Service Name'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('service_name_ar', __('Service Name Ar'))->rules(function ($form) {
+        $form->text('service_name_gj', __('Service Name Gj'))->rules(function ($form) {
+            return 'required|max:100';
+        });
+        
+        $form->text('service_name_hi', __('Service Name Hi'))->rules(function ($form) {
             return 'required|max:100';
         });
         $form->textarea('description', __('Description'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->textarea('description_ar', __('Description Ar'))->rules(function ($form) {
+        $form->textarea('description_gj', __('Description Gj'))->rules(function ($form) {
+            return 'required|max:100';
+        });
+        $form->textarea('description_hi', __('Description Hi'))->rules(function ($form) {
             return 'required|max:100';
         });
         // $form->text('estimation_hours', __('Estimation hours'));

@@ -31,7 +31,13 @@ class ViewOrderController extends Controller
             $data['customer_name'] = Customer::where('id',$order_details->customer_id)->value('customer_name');
             $data['address'] = Address::where('id',$order_details->address_id)->value('address');
             $data['door_no'] = Address::where('id',$order_details->address_id)->value('door_no');
-            $data['expected_delivery_date'] = date('d M-Y',strtotime($order_details->expected_delivery_date));
+            $data['delivery_date'] = date('d M-Y',strtotime($order_details->delivery_date));
+            $data['delivery_time'] = date('H:M',strtotime($order_details->delivery_time));
+            $data['pickup_date'] = date('d M-Y',strtotime($order_details->pickup_date));
+            $data['pickup_time'] = date('H:M',strtotime($order_details->pickup_time));
+
+
+
             $data['collected_by'] = (DeliveryBoy::where('id',$order_details->collected_by)->value('delivery_boy_name') != '' ) ? DeliveryBoy::where('id',$order_details->collected_by)->value('delivery_boy_name') : "---" ;
             $data['delivered_by'] = (DeliveryBoy::where('id',$order_details->delivered_by)->value('delivery_boy_name') != '' ) ? DeliveryBoy::where('id',$order_details->delivered_by)->value('delivery_boy_name') : "---" ;
             $data['payment_mode'] = PaymentMethod::where('id',$order_details->payment_mode)->value('payment_mode');

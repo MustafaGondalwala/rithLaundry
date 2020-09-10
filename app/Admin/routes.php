@@ -9,7 +9,6 @@ Route::group([
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
-
     $router->get('/', 'HomeController@index')->name('admin.home');
     $router->get('get_products', 'GeneralController@GetProducts');
     $router->get('view_orders/{id}', 'ViewOrderController@index');
@@ -27,4 +26,11 @@ Route::group([
     $router->resource('orders', OrderController::class);
     $router->resource('payment-methods', PaymentMethodController::class);
     $router->resource('banner-images', BannerImageController::class);
+    $router->resource('main-landmark', MainLandmarkControllerCopy::class);
+    $router->resource('sub-landmark', SubLandmarkController::class);
+    $router->resource('customer_feedback', CustomerFeedbackController::class);
+
+
+    
+
 });

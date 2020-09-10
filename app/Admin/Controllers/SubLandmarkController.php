@@ -2,22 +2,22 @@
 
 namespace App\Admin\Controllers;
 
-use App\Category;
-use App\Status;
 use App\Service;
+use App\SubLandmark;
+use App\MainLandmark;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CategoryController extends AdminController
+class SubLandmarkController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'Categories';
+    protected $title = 'Sub Landmark';
 
     /**
      * Make a grid builder.
@@ -26,18 +26,21 @@ class CategoryController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Category);
+        $grid = new Grid(new SubLandmark);
 
         $grid->column('id', __('Id'));
-        $grid->column('category_name', __('Category Name'));
-        $grid->column('category_name_gj', __('category Name Gj'));
-        $grid->column('category_name_hi', __('category Name Hi'));
-        $grid->column('status', __('Status'))->display(function($status){
-            $status_name = Status::where('id',$status)->value('status_name');
+        $grid->column('landmark_id', __('Landmark Name'))->display(function($id){
+            return MainLandmark::where("id",$id)->value('landmark_name');
+        });
+        $grid->column('landmark_name', __('Sub-Landmark Name'));
+        $grid->column('landmark_name_gj', __('Sub-Landmark Name GJ'));
+        $grid->column('landmark_name_hi', __('Sub-Landmark Name HI'));
+        $grid->column('status_name', __('Status'))->display(function($status){
+            $status_name = SubLandmark::where('id',$status)->value('status_name');
             if ($status == 1) {
-                return "<span class='label label-success'>$status_name</span>";
+                return "<span class='label label-success'>Avaible</span>";
             } else {
-                return "<span class='label label-danger'>$status_name</span>";
+                return "<span class='label label-danger'>Dis-enabled</span>";
             }
         });
         $grid->disableExport();
@@ -46,10 +49,9 @@ class CategoryController extends AdminController
         });
         $grid->filter(function ($filter) {
             //Get All status
-            $statuses = Status::pluck('status_name', 'id');
-            
-            $filter->like('category_name', 'Category Name');
-            $filter->like('category_name_ar', 'category Name Ar');
+            $statuses = SubLandmark::pluck('status_name', 'id');
+            $filter->like('landmark_name', 'Landmark Name');
+            $filter->like('landmark_name_gj', 'Landmark Name gj');
             $filter->equal('status', 'Status')->select($statuses);
         });
         return $grid;
@@ -63,16 +65,15 @@ class CategoryController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Category::findOrFail($id));
-
+        $show = new Show(SubLandmark::findOrFail($id));
         $show->field('id', __('Id'));
-        $show->field('category_name', __('Category name'));
+        $show->field('service_name', __('Service name'));
         $show->field('description', __('Description'));
+        // $show->field('estimation_hours', __('Estimation hours'));
         $show->field('image', __('Image'));
         $show->field('status', __('Status'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
-
         return $show;
     }
 
@@ -83,23 +84,23 @@ class CategoryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Category);
-        $statuses = Status::pluck('status_name', 'id');
-        $form->multipleSelect('service_id', __('Services'))->options(Service::all()->pluck('service_name', 'id'))->rules(function ($form) {
+        $form = new Form(new SubLandmark);
+        $statuses = SubLandmark::pluck('status_name', 'id');
+        $mainstatuses = MainLandmark::pluck('landmark_name','id');
+        $form->select('landmark_id', __('Land Mark'))->options($mainstatuses)->default(1)->rules(function ($form) {
             return 'required';
         });
-        $form->text('category_name', __('Category name'))->rules(function ($form) {
+        $form->text('landmark_name', __('Sub-Land Mark'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('category_name_gj', __('category Name Gj'))->rules(function ($form) {
+        $form->text('landmark_name_gj', __('Sub-Land GJ'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('category_name_hi', __('category Name Hi'))->rules(function ($form) {
+        $form->textarea('landmark_name_hi', __('Sub-Land HI'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->select('status', __('Status'))->options($statuses)->default(1)->rules(function ($form) {
-            return 'required';
-        });
+        
+        
         $form->tools(function (Form\Tools $tools) {
             $tools->disableDelete(); 
             $tools->disableView();
@@ -111,5 +112,4 @@ class CategoryController extends AdminController
         });
         return $form;
     }
-    
 }

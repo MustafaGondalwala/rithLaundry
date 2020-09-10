@@ -15,7 +15,7 @@ npm-debug.log
 #storage/*.key
 #.env.*.php
 #.env.php
-#.env
+.env
 #Homestead.yaml
 #Homestead.json
 

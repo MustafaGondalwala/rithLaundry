@@ -29,7 +29,8 @@ class PaymentMethodController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('payment_mode', __('Payment mode'));
-        $grid->column('payment_mode_ar', __('Payment Mode Ar'));
+        $grid->column('payment_mode_gj', __('Payment Mode Gj'));
+        $grid->column('payment_mode_hi', __('Payment Mode Hi'));
         $grid->column('icon', __('Icon'))->image();
         $grid->column('status', __('Status'))->display(function($status){
             $status_name = Status::where('id',$status)->value('status_name');
@@ -87,7 +88,10 @@ class PaymentMethodController extends AdminController
         $form->text('payment_mode', __('Payment Mode'))->rules(function ($form) {
             return 'required';
         });
-        $form->text('payment_mode_ar', __('Payment Mode Ar'))->rules(function ($form) {
+        $form->text('payment_mode_gj', __('Payment Mode Gj'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('payment_mode_hi', __('Payment Mode Hi'))->rules(function ($form) {
             return 'required';
         });
         $form->image('icon', __('Icon'))->uniqueName()->rules(function ($form) {

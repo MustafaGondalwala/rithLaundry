@@ -31,7 +31,9 @@ class ProductController extends AdminController
         $grid->column('id', __('Id'));
 
         $grid->column('product_name', __('Product'));
-        $grid->column('product_name_ar', __('Product Ar'));
+        $grid->column('product_name_gj', __('Product Gj'));
+        $grid->column('product_name_hi', __('Product Hi'));
+
         $grid->column('category_id', __('Category'))->display(function($category){
             $category_name = Category::where('id',$category)->value('category_name');
             return $category_name;
@@ -96,7 +98,11 @@ class ProductController extends AdminController
         $form->text('product_name', __('Product name'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('product_name_ar', __('Product name Ar'))->rules(function ($form) {
+        $form->text('product_name_gj', __('Product name Gj'))->rules(function ($form) {
+            return 'required|max:100';
+        });
+        
+        $form->text('product_name_hi', __('Product name Hi'))->rules(function ($form) {
             return 'required|max:100';
         });
         $form->image('image', __('Image'))->rules('required')->uniqueName();

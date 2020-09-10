@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\CustomerFeedback;
+use App\MainLandmark;
+use App\SubLandmark;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 class CustomerController extends Controller
@@ -28,6 +31,44 @@ class CustomerController extends Controller
         //
     }
 
+    public function getAllLandmark(Request $request){
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'city' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors());
+        }
+        return response()->json(["success"=>MainLandmark::with('sublandmark')->where('city',$request->city)->get()]);
+    }
+    public function addFeedback(Request $request){
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'customer_id' => 'required',
+            'title' => 'required',
+            'rating'=>'required'
+        ]);
+        if ($validator->fails()) {
+            return $this->sendError($validator->errors());
+        }
+        try {
+            $new_feedback = new CustomerFeedback;
+            $new_feedback->customer_id = $input['customer_id'];
+            $new_feedback->title = $input['title'];
+            $new_feedback->rating = $input['rating'];
+            $new_feedback->description = $input['description'];
+            $new_feedback->save();
+            return response()->json([
+                "message"=>"Feedback Received. Thank You",
+                "status"=>1
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "message"=>"Error Occurred in Process. Please try again later.",
+                "status"=>0
+            ]);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

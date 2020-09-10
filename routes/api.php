@@ -37,6 +37,10 @@ Route::post('order', 'OrderController@store');
 Route::post('get_orders', 'OrderController@getOrders');
 Route::post('feedback',"OrderController@updateFeeback");
 
+Route::post('landmark',"CustomerController@getAllLandmark");
+Route::post('customer_feedback',"CustomerController@addFeedback");
+
+
 Route::resource('delivery_partner', 'DeliveryBoyController');
 Route::post('delivery_partner/profile_picture', 'DeliveryBoyController@profile_picture');
 Route::post('delivery_partner/login', 'DeliveryBoyController@login');
