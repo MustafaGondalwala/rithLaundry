@@ -29,8 +29,4 @@ Route::group([
     $router->resource('main-landmark', MainLandmarkControllerCopy::class);
     $router->resource('sub-landmark', SubLandmarkController::class);
     $router->resource('customer_feedback', CustomerFeedbackController::class);
-
-
-    
-
 });

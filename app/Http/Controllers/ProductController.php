@@ -60,17 +60,23 @@ class ProductController extends Controller
         }
         if($input['lang'] == 'en'){
             $categories = Category::select('id','category_name')->where('status',1)->whereIn('id',$find_ids)->get();
-        }else{
-            $categories = Category::select('id','category_name_ar as category_name')->where('status',1)->whereIn('id',$find_ids)->get();
+        }else if($input['lang'] == 'gj'){
+            $categories = Category::select('id','category_name_gj as category_name')->where('status',1)->whereIn('id',$find_ids)->get();
+        }else if($input['lang'] == 'hi'){
+            $categories = Category::select('id','category_name_hi as category_name')->where('status',1)->whereIn('id',$find_ids)->get();
         }
-        
         foreach ($categories as $key => $value) {
             
             if($input['lang'] == 'en'){
                 $categories[$key]['product'] = Product::where('status',1)->where('category_id',$value->id)->select('id','category_id','product_name','image','status')->get();
-            }else{
-                $categories[$key]['product'] = Product::where('status',1)->where('category_id',$value->id)->select('id','category_id','product_name_ar as product_name','image','status')->get();
             }
+            else if($input['lang'] == 'gj'){
+                $categories[$key]['product'] = Product::where('status',1)->where('category_id',$value->id)->select('id','category_id','product_name_gj as product_name','image','status')->get();
+            }
+            else if($input['lang'] == 'hi'){
+                $categories[$key]['product'] = Product::where('status',1)->where('category_id',$value->id)->select('id','category_id','product_name_hi as product_name','image','status')->get();
+            }
+
             foreach ( $categories[$key]['product'] as $key1 => $value1) {
                 $categories[$key]['product'][$key1]['price'] = FareManagement::where('service_id',$request->service_id)->where('category_id',$value->id)->where('product_id',$value1->id)->value('amount');
             }

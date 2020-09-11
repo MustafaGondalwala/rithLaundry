@@ -40,8 +40,11 @@ class ServiceController extends Controller
         $input = $request->all();
         if($input['lang'] == 'en'){
             $data = Service::where('status',1)->select('id','service_name','description','image','status')->get();
-        }else{
-            $data = Service::where('status',1)->select('id','service_name_ar as service_name','description_ar as description','image','status')->get();
+        }else if($input['lang'] == 'gj'){
+            $data = Service::where('status',1)->select('id','service_name_gj as service_name','description_gj as description','image','status')->get();
+        }
+        else if($input['lang'] == 'hi'){
+            $data = Service::where('status',1)->select('id','service_name_hi as service_name','description_hi as description','image','status')->get();
         }
         $banners = BannerImage::select('banner_image as url')->get();
         

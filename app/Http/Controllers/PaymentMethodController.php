@@ -15,8 +15,12 @@ class PaymentMethodController extends Controller
         $input = $request->all();
         if($input['lang'] == 'en'){
             $data = PaymentMethod::where('status',1)->select('id','payment_mode','icon','status')->get();
-        }else{
-            $data = PaymentMethod::where('status',1)->select('id','payment_mode_ar as payment_mode','icon','status')->get();
+        }
+        else if($input['lang'] == 'gj'){
+            $data = PaymentMethod::where('status',1)->select('id','payment_mode_gj as payment_mode','icon','status')->get();
+        }
+        else if($input['lang'] == 'hi'){
+            $data = PaymentMethod::where('status',1)->select('id','payment_mode_hi as payment_mode','icon','status')->get();
         }
         
         return response()->json([

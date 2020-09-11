@@ -30,9 +30,9 @@ class LabelController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('label_name', __('Label Name'));
-        $grid->column('label_name_ar', __('Label name Ar'));
+        $grid->column('label_name_gj', __('Label name GJ'));
         $grid->column('description', __('Description'));
-        $grid->column('description_ar', __('Description Ar'));
+        $grid->column('description_gj', __('Description GJ'));
 
         $grid->disableExport();
         $grid->disableCreateButton();
@@ -40,10 +40,7 @@ class LabelController extends AdminController
             $actions->disableView();
         });
         $grid->filter(function ($filter) {
-            
-            
             $filter->like('label_name', 'Label Name');
-    
         });
         return $grid;
     }
@@ -82,13 +79,19 @@ class LabelController extends AdminController
         $form->text('label_name', __('Label Name'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('label_name_ar', __('Label name Ar'))->rules(function ($form) {
+        $form->text('label_name_gj', __('Label name GJ'))->rules(function ($form) {
+            return 'required|max:100';
+        });
+        $form->text('label_name_hi', __('Label name HI'))->rules(function ($form) {
             return 'required|max:100';
         });
         $form->textarea('description', __('Description'))->rules(function ($form) {
             return 'required';
         });
-        $form->textarea('description_ar', __('Description Ar '))->rules(function ($form) {
+        $form->textarea('description_gj', __('Description GJ '))->rules(function ($form) {
+            return 'required';
+        });
+        $form->textarea('description_hi', __('Description Hi'))->rules(function ($form) {
             return 'required';
         });
         

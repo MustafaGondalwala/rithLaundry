@@ -164,7 +164,8 @@ class OrderController extends Controller
     {
         $input = $request->all();
         $validator = Validator::make($input, [
-            'customer_id' => 'required'
+            'customer_id' => 'required',
+            'lang' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -179,12 +180,22 @@ class OrderController extends Controller
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
-        }else{
+        }else if($input['lang'] == "gj"){ 
             $orders = DB::table('orders')
             ->join('addresses', 'addresses.id', '=', 'orders.address_id')
             ->join('labels', 'labels.id', '=', 'orders.status')
             ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
-            ->select('orders.id','orders.order_id','payment_methods.payment_mode_ar as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_ar as label_name','orders.created_at','orders.updated_at')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode_gj as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_gj as label_name','orders.created_at','orders.updated_at')
+            ->where('orders.customer_id',$input['customer_id'])
+            ->orderBy('orders.created_at', 'desc')
+            ->get();
+        }
+        else if($input['lang'] == "hi"){ 
+            $orders = DB::table('orders')
+            ->join('addresses', 'addresses.id', '=', 'orders.address_id')
+            ->join('labels', 'labels.id', '=', 'orders.status')
+            ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode_hi as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_hi as label_name','orders.created_at','orders.updated_at')
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
@@ -198,11 +209,20 @@ class OrderController extends Controller
                         ->where('order_items.order_id',$value->id)
                         ->get();
                 $orders[$key]->items = $item;
-            }else{
+            }else if($input['lang'] == "gj"){
                 $item = DB::table('order_items')
                         ->join('services', 'services.id', '=', 'order_items.service_id')
                         ->join('products', 'products.id', '=', 'order_items.product_id')
-                        ->select('order_items.id','order_items.service_id','order_items.product_id','order_items.qty','order_items.price','services.service_name_ar as service_name','products.product_name_ar as product_name')
+                        ->select('order_items.id','order_items.service_id','order_items.product_id','order_items.qty','order_items.price','services.service_name_gj as service_name','products.product_name_gj as product_name')
+                        ->where('order_items.order_id',$value->id)
+                        ->get();
+                $orders[$key]->items = $item;
+            }
+            else if($input['lang'] == "hi"){
+                $item = DB::table('order_items')
+                        ->join('services', 'services.id', '=', 'order_items.service_id')
+                        ->join('products', 'products.id', '=', 'order_items.product_id')
+                        ->select('order_items.id','order_items.service_id','order_items.product_id','order_items.qty','order_items.price','services.service_name_hi as service_name','products.product_name_hi as product_name')
                         ->where('order_items.order_id',$value->id)
                         ->get();
                 $orders[$key]->items = $item;
