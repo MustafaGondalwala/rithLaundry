@@ -42,7 +42,9 @@ class AddressController extends Controller
             'address' => 'required',
             'door_no' => 'required',
             'latitude' => 'required',
-            'longitude' => 'required'
+            'longitude' => 'required',
+            'landmark_id'=>'required',
+            'sublandmark_id'=>'required',
         ]);
 
         if($validator->fails()){
@@ -67,7 +69,6 @@ class AddressController extends Controller
                 "status" => 0
             ]);
         }
-
     }
 
     /**
