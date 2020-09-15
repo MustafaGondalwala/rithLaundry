@@ -39,7 +39,7 @@ class CustomerController extends Controller
         if ($validator->fails()) {
             return $this->sendError($validator->errors());
         }
-        return response()->json(["success"=>MainLandmark::with('sublandmark')->where('city',$request->city)->get()]);
+        return response()->json(["success"=>MainLandmark::where('city',$request->city)->get()]);
     }
     public function addFeedback(Request $request){
         $input = $request->all();
