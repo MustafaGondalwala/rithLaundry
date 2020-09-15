@@ -43,8 +43,7 @@ class AddressController extends Controller
             'door_no' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'landmark_id'=>'required',
-            'sublandmark_id'=>'required',
+            'landmark'=>'required',
         ]);
 
         if($validator->fails()){
@@ -101,7 +100,6 @@ class AddressController extends Controller
         }
 
         $address = Address::where('id',$input['id'])->first();
-
         if ($address) {
             return response()->json([
                 "result" => $address,
@@ -126,7 +124,6 @@ class AddressController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->all();
-
         $validator =  Validator::make($input,[
             'customer_id' => 'required',
             'address' => 'required',

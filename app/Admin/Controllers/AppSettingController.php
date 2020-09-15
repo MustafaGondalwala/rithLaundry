@@ -33,6 +33,7 @@ class AppSettingController extends AdminController
         $grid->column('email', __('Email'));
         $grid->column('country', __('Country'));
         $grid->column('default_currency', __('Default currency'));
+        $grid->column('delivery_charge', __('Delivery Charge'));
         $grid->disableExport();
         $grid->disableCreation();
         $grid->disableFilter();
@@ -59,6 +60,7 @@ class AppSettingController extends AdminController
         $show->field('contact_number', __('Contact number'));
         $show->field('email', __('Email'));
         $show->field('default_currency', __('Default currency'));
+        $show->field('delivery_charge', __('Delivery Charge'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -99,6 +101,9 @@ class AppSettingController extends AdminController
             return 'required';
         });
         $form->text('currency_short_code', __('Currency Short Code'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('delivery_charge', __('Delivery Charge'))->rules(function ($form) {
             return 'required';
         });
         $form->tools(function (Form\Tools $tools) {
