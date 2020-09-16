@@ -29,9 +29,14 @@ class PrivacyPolicyController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
-        $grid->column('title_ar', __('Title Ar'));
-        $grid->column('description_ar', __('Description Ar'));
+        $grid->column('title_gj', __('Title Gj'));
+        $grid->column('title_hi', __('Title Hi'));
+
         $grid->column('description', __('Description'));
+        $grid->column('description_gj', __('Description Gj'));
+        $grid->column('description_hi', __('Description Hi'));
+
+
         $grid->column('status', __('Status'))->display(function($status){
             $status_name = Status::where('id',$status)->value('status_name');
             if ($status == 1) {
@@ -48,7 +53,9 @@ class PrivacyPolicyController extends AdminController
             //Get All status
             $statuses = Status::pluck('status_name', 'id');
             $filter->like('title', 'Title');
-            $filter->like('title_ar', 'Title Ar');
+            $filter->like('title_gj', 'Title Gj');
+            $filter->like('title_hi', 'Title Hi');
+
             $filter->equal('status', 'Status')->select($statuses);
         });
         return $grid;
@@ -86,13 +93,19 @@ class PrivacyPolicyController extends AdminController
         $form->text('title', __('Title'))->rules(function ($form) {
             return 'required|max:100';
         });
-        $form->text('title_ar', __('Title Ar'))->rules(function ($form) {
+        $form->text('title_gj', __('Title Gj'))->rules(function ($form) {
+            return 'required|max:100';
+        });
+        $form->text('title_hi', __('Title Hi'))->rules(function ($form) {
             return 'required|max:100';
         });
         $form->textarea('description', __('Description'))->rules(function ($form) {
             return 'required';
         });
-        $form->textarea('description_ar', __('Description Ar'))->rules(function ($form) {
+        $form->textarea('description_gj', __('Description Gj'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->textarea('description_hi', __('Description Hi'))->rules(function ($form) {
             return 'required';
         });
         $form->select('status', __('Status'))->options($statuses)->default(1)->rules(function ($form) {

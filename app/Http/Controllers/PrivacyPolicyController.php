@@ -16,8 +16,11 @@ class PrivacyPolicyController extends Controller
         $input = $request->all();
         if($input['lang'] == 'en'){
             $data = PrivacyPolicy::where('status',1)->select('id','title','description','status')->get();
-        }else{
-            $data = PrivacyPolicy::where('status',1)->select('id','title_ar as title','description_ar as description','status')->get();
+        }else if($input['lang'] == 'gj'){
+            $data = PrivacyPolicy::where('status',1)->select('id','title_gj as title','description_gj as description','status')->get();
+        }
+        else if($input['lang'] == 'hi'){
+            $data = PrivacyPolicy::where('status',1)->select('id','title_hi as title','description_hi as description','status')->get();
         }
         return response()->json([
             "result" => $data,

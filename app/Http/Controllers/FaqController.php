@@ -16,8 +16,10 @@ class FaqController extends Controller
         $input = $request->all();
         if($input['lang'] == 'en'){
             $data = Faq::where('status',1)->select('id','question','answer','status')->get();
-        }else{
-            $data = Faq::where('status',1)->select('id','question_ar as question','answer_ar as answer','status')->get();
+        }else if($input['lang'] == 'gj'){
+            $data = Faq::where('status',1)->select('id','question_gj as question','answer_gj as answer','status')->get();
+        }else if($input['lang'] == 'hi'){
+            $data = Faq::where('status',1)->select('id','question_hi as question','answer_hi as answer','status')->get();
         }
         
         

@@ -29,9 +29,13 @@ class FaqController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('question', __('Question'));
-        $grid->column('question_ar', __('Question Ar'));
+        $grid->column('question_gj', __('Question Gj'));
+        $grid->column('question_hi', __('Question Hi'));
+
         $grid->column('answer', __('Answer'));
-         $grid->column('answer_ar', __('Answer Ar'));
+         $grid->column('answer_gj', __('Answer Gj'));
+         $grid->column('answer_hi', __('Answer Hi'));
+
         $grid->column('status', __('Status'))->display(function($status){
             $status_name = Status::where('id',$status)->value('status_name');
             if ($status == 1) {
@@ -86,13 +90,21 @@ class FaqController extends AdminController
         $form->text('question', __('Question'))->rules(function ($form) {
             return 'required';
         });
-        $form->text('question_ar', __('Question Ar'))->rules(function ($form) {
+        $form->text('question_gj', __('Question Gj'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('question_hi', __('Question Hi'))->rules(function ($form) {
             return 'required';
         });
         $form->textarea('answer', __('Answer'))->rules(function ($form) {
             return 'required';
         });
-         $form->textarea('answer_ar', __('Answer_Ar'))->rules(function ($form) {
+        
+        $form->textarea('answer_gj', __('Answer Gj'))->rules(function ($form) {
+            return 'required';
+        });
+        
+         $form->textarea('answer_hi', __('Answer Hi'))->rules(function ($form) {
             return 'required';
         });
         $form->select('status', __('Status'))->options($statuses)->default(1)->rules(function ($form) {

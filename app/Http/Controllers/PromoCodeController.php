@@ -17,8 +17,10 @@ class PromoCodeController extends Controller
         $input = $request->all();
         if($input['lang'] == 'en'){
             $data = PromoCode::where('status',1)->select('id','promo_name','promo_code','description','promo_type','discount','status')->get();
-        }else{
-            $data = PromoCode::where('status',1)->select('id','promo_name_ar as promo_name','promo_code','description_ar as description','promo_type','discount','status')->get();
+        }else if($input['lang'] == 'gj'){
+            $data = PromoCode::where('status',1)->select('id','promo_name_gj as promo_name','promo_code','description_gj as description','promo_type','discount','status')->get();
+        }else if($input['lang'] == 'hi'){
+            $data = PromoCode::where('status',1)->select('id','promo_name_hi as promo_name','promo_code','description_hi as description','promo_type','discount','status')->get();
         }
         return response()->json([
             "result" => $data,

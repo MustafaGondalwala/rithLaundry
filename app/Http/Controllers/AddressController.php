@@ -129,7 +129,8 @@ class AddressController extends Controller
             'address' => 'required',
             'door_no' => 'required',
             'latitude' => 'required',
-            'longitude' => 'required'
+            'longitude' => 'required',
+            'landmark'=>'required'
         ]);
 
         if($validator->fails()){
