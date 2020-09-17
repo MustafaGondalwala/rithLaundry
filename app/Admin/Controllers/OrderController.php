@@ -52,17 +52,13 @@ class OrderController extends AdminController
             return date('d M-Y',strtotime($expected_delivery_date));
         });
         
-        $grid->column('delivery_time', __('Delivery Time'))->display(function($expected_delivery_date){
-            return date('h:m',strtotime($expected_delivery_date));
-        });
+        $grid->column('delivery_time', __('Delivery Time'));
 
         $grid->column('pickup_date', __('Pickup date'))->display(function($expected_delivery_date){
             return date('d M-Y',strtotime($expected_delivery_date));
         });
         
-        $grid->column('pickup_time', __('Pickup Time'))->display(function($expected_delivery_date){
-            return date('h:m',strtotime($expected_delivery_date));
-        });
+        $grid->column('pickup_time', __('Pickup Time'));
         $grid->column('delivered_by', __('Delivered by'))->display(function($delivered_by){
             if($delivered_by){
                 return DeliveryBoy::where('id',$delivered_by)->value('delivery_boy_name');
@@ -221,10 +217,17 @@ class OrderController extends AdminController
             $data['cus_door_no'] = $address->door_no;
             $data['cus_address_lat'] = $address->latitude;
             $data['cus_address_lng'] = $address->longitude;
+            $data['cus_landmark'] = $address->landmark;
+
             $data['cus_name'] = $customer->customer_name;
             $data['cus_phone'] = $customer->phone_number;
             $data['discount'] = $order->discount;
-            $data['ex_del_date'] = date('d M-Y', strtotime($order->expected_delivery_date));
+            $data['ex_del_date'] = date('d M-Y', strtotime($order->delivery_date));
+            $data['ex_del_time'] = $order->delivery_time;
+            $data['ex_pickup_time'] = $order->pickup_time;
+            $data['ex_pickup_date'] = date('d M-Y', strtotime($order->pickup_date));
+
+
             $data['id'] = $order->id;
             $data['items'] = json_decode($order->items, true);
             $data['order_id'] = $order->order_id;
@@ -232,6 +235,12 @@ class OrderController extends AdminController
             $data['status'] = $order->status;
             $data['status_name'] = Label::where('id',$order->status)->value('label_name');
             $data['sub_total'] = $order->sub_total;
+            $data['delivery_charge'] = 0;
+
+            if($data['sub_total'] < 50){
+                $data['delivery_charge'] = $order->delivery_charge;
+            }
+
             $data['total'] = $order->total;
             if($order->status != 7){
                 $new_label = Label::where('id',$order->status+1)->first();

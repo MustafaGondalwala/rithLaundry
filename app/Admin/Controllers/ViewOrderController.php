@@ -44,6 +44,9 @@ class ViewOrderController extends Controller
             $data['sub_total'] = $app_setting->default_currency.$order_details->sub_total;
             $data['discount'] =  $app_setting->default_currency.$order_details->discount;
             $data['total'] =  $app_setting->default_currency.$order_details->total;
+            $data['delivery_charge'] =  $app_setting->default_currency.$order_details->delivery_charge;
+
+
             $data['status'] =  Label::where('id',$order_details->status)->value('label_name');
             $order_items = DB::table('order_items')
             ->join('services', 'services.id', '=', 'order_items.service_id')

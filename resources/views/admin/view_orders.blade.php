@@ -64,6 +64,11 @@
                 <th>Discount</th>
                 <td>{{$discount}}</td>
               </tr>
+              
+              <tr>
+                <th>Delivery Charge</th>
+                <td>{{$delivery_charge}}</td>
+              </tr>
               <tr>
                 <th>Total</th>
                 <td>{{$total}}</td>
