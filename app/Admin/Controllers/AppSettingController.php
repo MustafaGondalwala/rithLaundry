@@ -34,6 +34,7 @@ class AppSettingController extends AdminController
         $grid->column('country', __('Country'));
         $grid->column('default_currency', __('Default currency'));
         $grid->column('delivery_charge', __('Delivery Charge'));
+        $grid->column('min_bill', __('Min Bill'));
         $grid->disableExport();
         $grid->disableCreation();
         $grid->disableFilter();
@@ -104,6 +105,9 @@ class AppSettingController extends AdminController
             return 'required';
         });
         $form->text('delivery_charge', __('Delivery Charge'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('min_bill', __('Min Bill'))->rules(function ($form) {
             return 'required';
         });
         $form->tools(function (Form\Tools $tools) {

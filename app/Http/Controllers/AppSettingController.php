@@ -14,8 +14,8 @@ class AppSettingController extends Controller
     public function index()
     {
         $data = AppSetting::first();
-        $data->stripe_key = env('STRIPE_KEY');
-        $data->stripe_secret = env('STRIPE_API_KEY');
+        $data->RAZORPAY_KEYID = env('RAZORPAY_KEYID');
+        $data->RAZORPAY_SECRET = env('RAZORPAY_SECRET');
         return response()->json([
             "result" => $data,
             "message" => 'Success',
