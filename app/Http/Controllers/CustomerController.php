@@ -11,6 +11,7 @@ use Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 class CustomerController extends Controller
 {
@@ -32,6 +33,38 @@ class CustomerController extends Controller
     public function create()
     {
         //
+    }
+    public function validatePayment(Request $request){
+        $api = new Api(env("RAZORPAY_KEYID"), env("RAZORPAY_SECRET"));
+        $success = false;
+        $message = "";
+        if ( ! empty( $request->razorpay_payment_id ) ) {
+        try
+            {
+                $attributes = array(
+                    'razorpay_order_id' => $request->razorpay_order_id,
+                    'razorpay_payment_id' => $request->razorpay_payment_id,
+                    'razorpay_signature' => $request->razorpay_signature
+                );
+
+                $api->utility->verifyPaymentSignature($attributes);
+                $success = true;
+            }
+            catch(SignatureVerificationError $e)
+            {
+                $success = false;
+                $error = 'Razorpay Error : ' . $e->getMessage();
+            }
+        }
+        if ($success === true)
+        {
+            $html = "Payment success, Signature Verified";
+            return response()->json(["success"=>$success,"message"=>$html]);
+        }
+        else
+        {
+            return response()->json(["success"=>$success,"message"=>$html],400);
+        }
     }
     public function createRazorPayOrder(Request $request){
         $receipt = "rcptid_".rand(1000,9999);
