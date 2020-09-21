@@ -9,6 +9,9 @@ use App\MainLandmark;
 use App\SubLandmark;
 use Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Razorpay\Api\Api;
+
 class CustomerController extends Controller
 {
     /**
@@ -29,6 +32,21 @@ class CustomerController extends Controller
     public function create()
     {
         //
+    }
+    public function createRazorPayOrder(Request $request){
+        $receipt = "rcptid_".rand(1000,9999);
+        $currency = "INR";
+        $amount = $request->amount;
+
+        $api = new Api(env("RAZORPAY_KEYID"), env("RAZORPAY_SECRET"));
+    
+        $order = $api->order->create(array(
+            'receipt' => $receipt,
+            'amount' => $amount,
+            'currency' => $currency
+            )
+          );
+          return response()->json(["order_id"=>$order->id]);
     }
 
     public function getAllLandmark(Request $request){

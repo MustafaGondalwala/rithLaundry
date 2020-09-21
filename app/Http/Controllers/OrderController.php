@@ -8,6 +8,7 @@ use App\Order;
 use App\OrderItem;
 use App\PaymentResponse;
 use App\Label;
+use App\Customer;
 use Validator;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
@@ -185,7 +186,7 @@ class OrderController extends Controller
             ->join('addresses', 'addresses.id', '=', 'orders.address_id')
             ->join('labels', 'labels.id', '=', 'orders.status')
             ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
-            ->select('orders.id','orders.order_id','payment_methods.payment_mode_gj as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_gj as label_name','orders.created_at','orders.updated_at')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode_gj as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.delivery_time','orders.pickup_date','orders.pickup_time','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_gj as label_name','orders.created_at','orders.updated_at')
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
@@ -195,7 +196,7 @@ class OrderController extends Controller
             ->join('addresses', 'addresses.id', '=', 'orders.address_id')
             ->join('labels', 'labels.id', '=', 'orders.status')
             ->join('payment_methods', 'orders.payment_mode', '=', 'payment_methods.id')
-            ->select('orders.id','orders.order_id','payment_methods.payment_mode_hi as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_hi as label_name','orders.created_at','orders.updated_at')
+            ->select('orders.id','orders.order_id','payment_methods.payment_mode_hi as payment_mode','addresses.address','addresses.door_no','orders.delivery_date','orders.delivery_time','orders.pickup_date','orders.pickup_time','orders.total','orders.discount','orders.sub_total','orders.status','orders.items','labels.label_name_hi as label_name','orders.created_at','orders.updated_at')
             ->where('orders.customer_id',$input['customer_id'])
             ->orderBy('orders.created_at', 'desc')
             ->get();
