@@ -42,30 +42,30 @@ class OrderController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Order);
-
         $grid->column('id', __('Id'));
         $grid->column('order_id', __('Order id'));
         $grid->column('customer_id', __('Customer id'))->display(function($customer_id){
             return Customer::where('id',$customer_id)->value('customer_name');
         });
-        $grid->column('delivery_date', __('Delivery date'))->display(function($expected_delivery_date){
-            return date('d M-Y',strtotime($expected_delivery_date));
-        });
-        
-        $grid->column('delivery_time', __('Delivery Time'));
-
         $grid->column('pickup_date', __('Pickup date'))->display(function($expected_delivery_date){
             return date('d M-Y',strtotime($expected_delivery_date));
         });
-        
         $grid->column('pickup_time', __('Pickup Time'));
+
+
+        
+
+        $grid->column('delivery_date', __('Delivery date'))->display(function($expected_delivery_date){
+            return date('d M-Y',strtotime($expected_delivery_date));
+        });
+        $grid->column('delivery_time', __('Delivery Time'));
+        
         $grid->column('delivered_by', __('Delivered by'))->display(function($delivered_by){
             if($delivered_by){
                 return DeliveryBoy::where('id',$delivered_by)->value('delivery_boy_name');
             }else{
                 return '---';
             }
-            
         });
         $grid->column('status', __('Status'))->display(function($status){
             $label_name = Label::where('id',$status)->value('label_name');
@@ -78,7 +78,7 @@ class OrderController extends AdminController
         $grid->column('View Orders')->display(function () {
             return "<a href='/admin/view_orders/".$this->id."'><span class='label label-info'>View Orders</span></a>";
         });
-        $grid->disableExport();
+        // $grid->disableExport();
         $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             $actions->disableView();
@@ -92,7 +92,8 @@ class OrderController extends AdminController
             $filter->equal('collected_by', 'Collected By')->select($delivery_boys);
             $filter->equal('delivered_by', 'Delivered By')->select($delivery_boys);
             $filter->equal('status', 'Status')->select($labels);
-            $filter->date('expected_delivery_date', 'Expected Delivery Date');
+            $filter->date('delivery_date', 'Delivery Date');
+            $filter->date('pickup_date', 'Pickup Date');
         });
         return $grid;
     }

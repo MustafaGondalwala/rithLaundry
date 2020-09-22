@@ -35,7 +35,13 @@ class AppSettingController extends AdminController
         $grid->column('default_currency', __('Default currency'));
         $grid->column('delivery_charge', __('Delivery Charge'));
         $grid->column('min_bill', __('Min Bill'));
-        $grid->disableExport();
+        $grid->column('9_12slot', __('9_12slot'));
+        $grid->column('12_3slot', __('12_3slot'));
+        $grid->column('3_6slot', __('3_6slot'));
+        $grid->column('6_9slot', __('6_9slot'));
+        $grid->column('app_version', __('App Version'));
+
+        // $grid->disableExport();
         $grid->disableCreation();
         $grid->disableFilter();
         $grid->actions(function ($actions) {
@@ -108,6 +114,21 @@ class AppSettingController extends AdminController
             return 'required';
         });
         $form->text('min_bill', __('Min Bill'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('9_12slot', __('9_12slot'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('12_3slot', __('12_3slot'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('3_6slot', __('3_6slot'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('6_9slot', __('6_9slot'))->rules(function ($form) {
+            return 'required';
+        });
+        $form->text('app_version', __('App Version'))->rules(function ($form) {
             return 'required';
         });
         $form->tools(function (Form\Tools $tools) {
