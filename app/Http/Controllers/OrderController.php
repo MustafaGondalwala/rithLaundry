@@ -73,6 +73,7 @@ class OrderController extends Controller
             'promo_id' => 'required',
             'payment_mode' => 'required',
             'payment_response' => 'required',
+            'delivery_type'=>'required',
             'items' => 'required'
         ]);
 
@@ -93,7 +94,6 @@ class OrderController extends Controller
         $input['pickup_date'] = date('Y-m-d', strtotime($input['pickup_date']));
         $order = Order::create($input);
         $order_id = str_pad($order->id, 5, "0", STR_PAD_LEFT);
-        
         Order::where('id',$order->id)->update([ 'order_id'=>$order_id]);
         if (is_object($order)) {
             foreach ($items as $key => $value) {

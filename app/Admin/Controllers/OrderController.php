@@ -47,6 +47,12 @@ class OrderController extends AdminController
         $grid->column('customer_id', __('Customer id'))->display(function($customer_id){
             return Customer::where('id',$customer_id)->value('customer_name');
         });
+        
+        $grid->column('delivery_type', __('Delivery Type'));
+        $grid->column('address_id',__('Landmark'))->display(function($address_id){
+            return Address::find($address_id)->landmark;
+        });
+
         $grid->column('pickup_date', __('Pickup date'))->display(function($expected_delivery_date){
             return date('d M-Y',strtotime($expected_delivery_date));
         });
@@ -165,7 +171,6 @@ class OrderController extends AdminController
                $delivery_boy_token = DeliveryBoy::where('id',$form->model()->delivered_by)->value('fcm_token');
                 $this->send_fcm($message->delivery_title, $message->delivery_description, $delivery_boy_token); 
             }
-            
         });
         $form->tools(function (Form\Tools $tools) {
             $tools->disableDelete(); 

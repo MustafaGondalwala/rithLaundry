@@ -256,8 +256,10 @@ class CustomerController extends Controller
         //
     }
     public function otp($phone_number){
-        // return rand(1,9999);
-        return 1234;
+        return rand(1111,9999);
+    }
+    public function createMessage($otp){
+        return "Dear Customer, Your Otp for single use is ".$otp.". Only valid for 20 minutes. Keep it confidential.";
     }
     public function sendOtp(Request $request){
         $customer_exist = Customer::where(["phone_number"=>$request->phone_number])->count();
@@ -268,6 +270,20 @@ class CustomerController extends Controller
             ]);
         }
         $random_number = $this->otp($request->phone_number);
+        $client = new \GuzzleHttp\Client();
+        $client->request('post','https://www.fast2sms.com/dev/bulk',[
+            'form_params'=>[
+                'sender_id'=>env('SENDER_ID'),
+                'language'=>'english',
+                'route'=>"t",
+                'numbers'=>$request->phone_number,
+                'message'=>$this->createMessage($random_number),
+            ],
+            'headers' => [
+            'authorization' => env('FAST2SMS_APIKEY')
+        ]]);
+
+        
         Customer::where(["phone_number"=>$request->phone_number])->update(["otp"=>$random_number]);
         return response()->json([
             "message" => 'Otp Sended',
