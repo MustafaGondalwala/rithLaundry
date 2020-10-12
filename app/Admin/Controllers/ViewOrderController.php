@@ -32,9 +32,9 @@ class ViewOrderController extends Controller
             $data['address'] = Address::where('id',$order_details->address_id)->value('address');
             $data['door_no'] = Address::where('id',$order_details->address_id)->value('door_no');
             $data['delivery_date'] = date('d M-Y',strtotime($order_details->delivery_date));
-            $data['delivery_time'] = date('H:M',strtotime($order_details->delivery_time));
+            $data['delivery_time'] = $order_details->delivery_time;
             $data['pickup_date'] = date('d M-Y',strtotime($order_details->pickup_date));
-            $data['pickup_time'] = date('H:M',strtotime($order_details->pickup_time));
+            $data['pickup_time'] = $order_details->pickup_time;
 
 
 

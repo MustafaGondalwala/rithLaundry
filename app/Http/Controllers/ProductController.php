@@ -65,6 +65,7 @@ class ProductController extends Controller
         }else if($input['lang'] == 'hi'){
             $categories = Category::select('id','category_name_hi as category_name')->where('status',1)->whereIn('id',$find_ids)->get();
         }
+
         foreach ($categories as $key => $value) {
             
             if($input['lang'] == 'en'){

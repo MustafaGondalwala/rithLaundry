@@ -47,6 +47,8 @@ class PromoCodeController extends AdminController
             }
         });
         $grid->column('discount', __('Discount'));
+        $grid->column('max_used', __('Max Used'));
+	$grid->column('is_hide','Is Hide');
         // $grid->column('status', __('Status'));
         // $grid->column('created_at', __('Created at'));
         $grid->column('status', __('Status'))->display(function($status){
@@ -108,6 +110,12 @@ class PromoCodeController extends AdminController
         $form = new Form(new PromoCode);
         $statuses = Status::pluck('status_name', 'id');
         $promo_types = PromoType::pluck('type_name', 'id');
+
+
+
+	$form->text('service_id', __('Services'))->rules(function ($form) {
+            return 'required|max:100';
+        });
         $form->text('promo_name', __('Promo name'))->rules(function ($form) {
             return 'required|max:100';
         });
@@ -137,7 +145,13 @@ class PromoCodeController extends AdminController
         $form->select('promo_type', __('Promo type'))->options($promo_types)->default(1)->rules(function ($form) {
             return 'required';
         });
-        $form->decimal('discount', __('Discount'))->rules(function ($form) {
+        $form->text('max_used', __('Max Used'))->rules(function ($form) {
+            return 'required';
+        });
+	$form->text('is_hide',__('Is Hide'))->rules(function($form){
+	return  'required';
+	});
+	$form->decimal('discount', __('Discount'))->rules(function ($form) {
             return 'required|numeric|min:0|not_in:0';
         });
         $form->select('status', __('Status'))->options($statuses)->default(1)->rules(function ($form) {

@@ -39,14 +39,14 @@ class ServiceController extends Controller
     {   
         $input = $request->all();
         if($input['lang'] == 'en'){
-            $data = Service::where('status',1)->select('id','service_name','description','image','status')->get();
+            $data = Service::where('status',1)->select('id','service_name','description','image','status','total_hours')->get();
         }else if($input['lang'] == 'gj'){
-            $data = Service::where('status',1)->select('id','service_name_gj as service_name','description_gj as description','image','status')->get();
+            $data = Service::where('status',1)->select('id','service_name_gj as service_name','description_gj as description','image','status','total_hours')->get();
         }
         else if($input['lang'] == 'hi'){
-            $data = Service::where('status',1)->select('id','service_name_hi as service_name','description_hi as description','image','status')->get();
+            $data = Service::where('status',1)->select('id','service_name_hi as service_name','description_hi as description','image','status','total_hours')->get();
         }
-        $banners = BannerImage::select('banner_image as url')->get();
+        $banners = BannerImage::select('banner_image as url')->where('status',"!=",2)->get();
         
         foreach($banners as $key => $value){
             $banners[$key]->url = env('APP_URL').'/uploads/'.$value->url;

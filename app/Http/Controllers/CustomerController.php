@@ -152,7 +152,7 @@ class CustomerController extends Controller
             return response()->json([
                 "message" => 'Sorry, something went wrong !',
                 "status" => 0
-            ]);
+            ],400);
         }
 
     }
@@ -423,7 +423,7 @@ class CustomerController extends Controller
         $response['error'] = "validation_error";
         $response['message'] = implode('',$message);
         $response['status'] = "0";
-        return response()->json($response, 200);
+        return response()->json($response, 500);
     } 
 
 }

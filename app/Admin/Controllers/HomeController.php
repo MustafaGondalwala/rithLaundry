@@ -24,7 +24,7 @@ class HomeController extends Controller
             $current_year = date("Y");
             $data['customers'] = Customer::where('status','!=',0)->count();
             $data['total_orders'] = Order::count();
-            $data['completed_orders'] = Order::where('status','=',5)->count();
+            $data['completed_orders'] = Order::where('status','=',7)->count();
             $data['delivery_boys'] = DeliveryBoy::where('status','!=',0)->count();
 
             $customers = Customer::select('id', 'created_at')
