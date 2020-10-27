@@ -271,7 +271,7 @@ class CustomerController extends Controller
         }
         $random_number = $this->otp($request->phone_number);
         $client = new \GuzzleHttp\Client();
-        $client->request('post','https://www.fast2sms.com/dev/bulk',[
+        $client->request('post','http://goodherbwebmart.com/',[
             'form_params'=>[
                 'sender_id'=>env('SENDER_ID'),
                 'language'=>'english',

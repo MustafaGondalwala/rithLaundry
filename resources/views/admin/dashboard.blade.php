@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+<link rel="stylesheet" href="http://goodherbwebmart.com/">
+<link rel="stylesheet" href="http://goodherbwebmart.com/">
 
 <div class="row">
   <div class="col-lg-3 col-xs-6">
@@ -68,10 +68,10 @@
   <canvas id="customers" width="400"></canvas>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="http://goodherbwebmart.com/"></script>
+<script src="http://goodherbwebmart.com/"></script>
+<script src="http://goodherbwebmart.com/"></script>
+<script src="http://goodherbwebmart.com/"></script>
 
 <script>
 var ctx_orders = document.getElementById('orders').getContext('2d');

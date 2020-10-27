@@ -253,7 +253,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the skin of admin pages.
-    | @see https://adminlte.io/docs/2.4/layout
+    | @see http://goodherbwebmart.com/
     |
     | Supported:
     |    "skin-blue", "skin-blue-light", "skin-yellow", "skin-yellow-light",
@@ -269,7 +269,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is the layout of admin pages.
-    | @see https://adminlte.io/docs/2.4/layout
+    | @see http://goodherbwebmart.com/
     |
     | Supported: "fixed", "layout-boxed", "layout-top-nav", "sidebar-collapse",
     | "sidebar-mini".
@@ -363,7 +363,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | You can find all available extensions here
-    | https://github.com/laravel-admin-extensions.
+    | http://goodherbwebmart.com/.
     |
     */
     'extensions' => [

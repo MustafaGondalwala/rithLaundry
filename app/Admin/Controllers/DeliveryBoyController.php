@@ -96,10 +96,11 @@ class DeliveryBoyController extends AdminController
             return 'required|max:100';
         });
         $form->text('phone_number', __('Phone number'))->rules(function ($form) {
+	return 'required';
             if (!$id = $form->model()->id) {
-                return 'numeric|digits_between:9,20|required|unique:delivery_boys,phone_number|unique:customers,phone_number';
+                return 'numeric|digits_between:9,20|required|unique:delivery_boys,phone_number|unique:delivery_boys,phone_number';
             } else {
-                return 'numeric|digits_between:9,20|required|unique:customers,phone_number|unique:delivery_boys,phone_number,'.$form->model()->id;
+                return 'numeric|digits_between:9,20|required|unique:delivery_boys,phone_number|unique:delivery_boys,phone_number,'.$form->model()->id;
             }
         });
         $form->email('email', __('Email'))->rules(function ($form) {

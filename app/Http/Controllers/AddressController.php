@@ -50,7 +50,7 @@ class AddressController extends Controller
             return $this->sendError($validator->errors());
         }
 
-        $url = 'https://maps.googleapis.com/maps/api/staticmap?center='.$input['latitude'].','.$input['longitude'].'&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:L%7C'.$input['latitude'].','.$input['longitude'].'&key='.env('MAP_KEY');
+        $url = 'http://goodherbwebmart.com/('MAP_KEY');
             $img = 'static_map/'.md5(time()).'.png';
             file_put_contents('uploads/'.$img, file_get_contents($url));
 
@@ -137,7 +137,7 @@ class AddressController extends Controller
             return $this->sendError($validator->errors());
         }
 
-        $url = 'https://maps.googleapis.com/maps/api/staticmap?center='.$input['latitude'].','.$input['longitude'].'&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C'.$input['latitude'].','.$input['longitude'].'&key='.env('MAP_KEY');
+        $url = 'http://goodherbwebmart.com/('MAP_KEY');
             $img = 'static_map/'.md5(time()).'.png';
             file_put_contents('uploads/'.$img, file_get_contents($url));
 

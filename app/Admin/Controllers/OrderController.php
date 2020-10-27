@@ -162,6 +162,7 @@ class OrderController extends AdminController
                 return back()->with(compact('error'));
            }
         });
+	try{
         $form->saved(function (Form $form) {
             $this->update_history($form->model()->id);
             $message = DB::table('fcm_notification_messages')->where('id',$form->model()->status)->first();
@@ -172,6 +173,9 @@ class OrderController extends AdminController
                 $this->send_fcm($message->delivery_title, $message->delivery_description, $delivery_boy_token); 
             }
         });
+}catch(\Exception $error){
+dd($error->getMessage());
+}
         $form->tools(function (Form\Tools $tools) {
             $tools->disableDelete(); 
             $tools->disableView();
@@ -232,8 +236,7 @@ class OrderController extends AdminController
             $data['ex_del_time'] = $order->delivery_time;
             $data['ex_pickup_time'] = $order->pickup_time;
             $data['ex_pickup_date'] = date('d M-Y', strtotime($order->pickup_date));
-
-
+            $data['delivery_type'] = $order->delivery_type;
             $data['id'] = $order->id;
             $data['items'] = json_decode($order->items, true);
             $data['order_id'] = $order->order_id;
@@ -271,14 +274,12 @@ class OrderController extends AdminController
         $notificationBuilder = new PayloadNotificationBuilder($title);
         $notificationBuilder->setBody($description)
                             ->setSound('default')->setBadge(1);
-        
         $dataBuilder = new PayloadDataBuilder();
         $dataBuilder->addData(['a_data' => 'my_data']);
-        
         $option = $optionBuilder->build();
         $notification = $notificationBuilder->build();
         $data = $dataBuilder->build();
         $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
-        return $downstreamResponse->numberSuccess();
+	return $downstreamResponse->numberSuccess();
     }
 } 
